@@ -24,7 +24,10 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   int _speakerTime = 60; // Default speaker time in seconds
-  int _remainingTime = 60; // Remaining time in seconds
+  int _remainingTime = 60;
+  int _caucusTime = 0;
+  int _remainingCaucusTime = 0;
+  int currentSpeakersListTime = 60; // Remaining time in seconds
 
 
   List<Speaker> _speakersList = [];
@@ -47,6 +50,7 @@ class _MainPageState extends State<MainPage> {
 
   String modType = 'Mod';
   String runningModType = 'Mod';
+
   String selectedMotionCountry = 'United Kingdom';
   String _notes = "";
   String _currentMode = 'Speakers List';
@@ -54,9 +58,11 @@ class _MainPageState extends State<MainPage> {
   Speaker? currentSpeaker;
   Speaker? currentModSpeaker;
   bool fullSpeakersList = false;
+  Motion? runningMotion;
 
   //Not implimented yet
   bool isAblePreferLast = true;
+  bool isAuthorFirstOnSpeakersList = false;
   
 
 
@@ -240,18 +246,21 @@ Widget _buildBody() {
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_remainingTime > 0) {
-          _remainingTime--;
-        } else {
-          _timer?.cancel();
-          _isTimerRunning = false;
-        }
-      });
+  _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    setState(() {
+      if (_remainingTime > 0) {
+        _remainingTime--;
+      } else {
+        _timer?.cancel();
+        _isTimerRunning = false;
+      }
+      if (_remainingCaucusTime > 0) {
+        _remainingCaucusTime--;
+      }
     });
-    _isTimerRunning = true;
-  }
+  });
+  _isTimerRunning = true;
+}
 
   void _resetTimer() {
     _timer?.cancel();
@@ -263,6 +272,9 @@ Widget _buildBody() {
 
   void _setSpeakerTime(int seconds) {
     setState(() {
+      if(_currentMode == "Speakers List"){
+        currentSpeakersListTime = seconds;
+      }
       _speakerTime = seconds;
       _remainingTime = seconds;
     });
@@ -271,7 +283,9 @@ Widget _buildBody() {
   Widget _buildTimer() {
     String formattedTime = _formatTime(_remainingTime);
     String formattedTotalTime = _formatTime(_speakerTime);
-    Speaker? timerSpeaker;
+    String formattedCaucusTime = _formatTime(_remainingCaucusTime);
+    String formattedTotalCaucusTime = _formatTime(_caucusTime);
+      Speaker? timerSpeaker;
     if(_currentMode == "Speakers List"){timerSpeaker = currentSpeaker;}
     else{timerSpeaker = currentModSpeaker;}
 
@@ -369,7 +383,7 @@ Widget _buildBody() {
                   else{
                     if (_currentMod.isNotEmpty) {
                     setState(() {
-                      currentModSpeaker = _currentMod.removeAt(0);
+                        currentModSpeaker = _currentMod.removeAt(0);
                     });
                     } else {
                       setState(() {
@@ -440,6 +454,12 @@ Widget _buildBody() {
               _currentMode = _currentMode == 'Speakers List'
                   ? 'Moderated Caucus'
                   : 'Speakers List';
+              if (_currentMode == "Speakers List"){
+                _setSpeakerTime(currentSpeakersListTime);
+              }
+              else if(_currentMode == "Moderated Caucus"){
+                _setSpeakerTime(runningMotion?.speakingTime ?? 60);
+              }
             });
           },
           child: Text(_currentMode),
@@ -650,6 +670,7 @@ Widget _buildBody() {
                 selected: {},
                 onSelectionChanged: (Set<int> newSelection) {
                   if (newSelection.contains(0)) {
+                    _preformMotionFunction(_motions[index]);
                     _deleteMotion(_motions[index]);
                     // Motion passed
                     setState(() {
@@ -910,7 +931,7 @@ Widget _buildBody() {
 
   Future<void> _deleteMotion(Motion deletedMotion) async{
     await Supabase.instance.client
-        .from('motions').delete().eq('type', deletedMotion.type).eq('created_by', deletedMotion.author.toJson()).eq('committee_id', widget.committee.id);
+        .from('motions').delete().eq('type', deletedMotion.type).eq('description', deletedMotion.description).eq('committee_id', widget.committee.id).eq("caucus_time", deletedMotion.caucusTime);
   }
 
   Widget _buildStatistics() {
@@ -1174,7 +1195,159 @@ Widget _buildBody() {
   }
 }
 
+ void _preformMotionFunction(Motion _selectedMotion){
+  if (_selectedMotion.type == "Mod"){
+    runningModType = "Mod";
+    _currentMod.clear();
+    _currentMode = 'Moderated Cacus';
+    _setSpeakerTime(_selectedMotion.speakingTime);
+    _setCaucusTime(_selectedMotion.caucusTime);
+    _showSpeakerOrderDialog(_selectedMotion);
+  }
+  else if (_selectedMotion.type == "Unmod"){
+    runningModType = "Unmod";
+    _currentMode = 'Speakers List';
+    _setSpeakerTime(_selectedMotion.speakingTime);
+    _setCaucusTime(_selectedMotion.caucusTime);
+  }
+  else if (_selectedMotion.type == "Seated Mod"){
+    runningModType = "Seated Mod";
+     _currentMod.clear();
+    _currentMode = 'Moderated Cacus';
+    _setSpeakerTime(_selectedMotion.speakingTime);
+    _showSpeakerOrderDialog(_selectedMotion);
+    _setCaucusTime(_selectedMotion.caucusTime);
+  }
+  else if (_selectedMotion.type == "Open Speakers List"){
+    runningModType = "Open Speakers List";
+    _currentMode = 'Speakers List';
+    if(isAuthorFirstOnSpeakersList){
+    _showSpeakerOrderDialog(_selectedMotion);
+    }
+  }
+  else if (_selectedMotion.type == "Round Robin"){
+    runningModType = "Round Robin";
+     _currentMod.clear();
+    _currentMode = 'Moderated Cacus';
+    _setCaucusTime(_selectedMotion.caucusTime);
+    _setSpeakerTime(_selectedMotion.speakingTime);
+    _showSpeakerOrderDialog(_selectedMotion);
+  }
+  else if (_selectedMotion.type == "Introduce Working Papers"){
 
+  }
+  else if (_selectedMotion.type == "Table Debate"){
+    
+  }
+  else if (_selectedMotion.type == "Enter voting procedure"){
+    
+  }
+  else if (_selectedMotion.type == "Supend Debate"){
+    
+  }
+  else if (_selectedMotion.type == "Consultation of the whole"){
+    runningModType = "Consultation of the whole";
+     _currentMod.clear();
+    _currentMode = 'Moderated Cacus';
+    _setCaucusTime(_selectedMotion.caucusTime);
+    _setSpeakerTime(_selectedMotion.speakingTime);
+    currentModSpeaker = Speaker(
+                        name: _selectedMotion.author.code,
+                        country: _selectedMotion.author,
+                      );
+  }
+  else if (_selectedMotion.type == "Adjourn Meeting"){
+    
+  }
+  else {
+
+  }
+  runningMotion = _selectedMotion;
+  setState(() {
+  });
+ }
+
+void _showSpeakerOrderDialog(Motion motion) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      bool _speakFirst = false;
+      bool _speakLast = false;
+
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return AlertDialog(
+            title: Text('Speaker Order'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CheckboxListTile(
+                  title: Text('Speak First'),
+                  value: _speakFirst,
+                  onChanged: (value) {
+                    setState(() {
+                      _speakFirst = value!;
+                      _speakLast = false;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text('Speak Last'),
+                  value: _speakLast,
+                  onChanged: (value) {
+                    setState(() {
+                      _speakLast = value!;
+                      _speakFirst = false;
+                    });
+                  },
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_speakFirst) {
+                    setState(() {
+                      currentModSpeaker = Speaker(
+                        name: motion.author.code,
+                        country: motion.author,
+                      );
+                    });
+                  } else if (_speakLast) {
+                    setState(() {
+                      currentModSpeaker = Speaker(
+                        name: motion.author.code,
+                        country: motion.author,
+                      );
+                      _currentMod.add(currentModSpeaker!);
+                    });
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    },
+  ).then((_) {
+    setState(() {});
+  });
+}
+
+void _setCaucusTime(int seconds) {
+  setState(() {
+    _caucusTime = seconds;
+    _remainingCaucusTime = seconds;
+  });
+}
 }
 
 

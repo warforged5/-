@@ -73,8 +73,8 @@ class Country {
 
    Map<String, dynamic> toJson() {
     return {
-      'name': name,
       'code': code,
+      'name': name,
     };
   }
 
