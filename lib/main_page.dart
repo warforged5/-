@@ -38,6 +38,10 @@ class _MainPageState extends State<MainPage> {
   bool _isTimerRunning = false;
   CountryList? _selectedCountryList;
   List<Country> selectedCountries = [];
+  List<Motion> _votingMotions = [];
+  String _resolutionName = '';
+  bool _isRollCallVote = false;
+  Map<String, String> _votes = {};
   
   TextEditingController _speakerTimeController = TextEditingController();
   TextEditingController _caucusTimeController = TextEditingController();
@@ -59,6 +63,7 @@ class _MainPageState extends State<MainPage> {
   Speaker? currentModSpeaker;
   bool fullSpeakersList = false;
   Motion? runningMotion;
+  bool _enableTinting = true;
 
   //Not implimented yet
   bool isAblePreferLast = true;
@@ -177,15 +182,32 @@ Widget _buildBody() {
         children: [
           SizedBox(height: 16.0),
           _buildTimer(),
-          SizedBox(height: 16.0),
+          SizedBox(height: 8.0),
           _buildButtons(),
-          SizedBox(height: 16.0),
+          Visibility(
+            visible: (runningMotion?.type == "Mod" ||
+            runningMotion?.type == "Unmod" ||
+            runningMotion?.type == "Seated Mod" ||
+            runningMotion?.type == "Round Robin" ||
+            runningMotion?.type == "Consulation of the Whole")
+            &&
+            _currentMode != "Speakers List"
+          , child: SizedBox(height: 8.0),),
+          Visibility(
+            visible: (runningMotion?.type == "Mod" ||
+            runningMotion?.type == "Unmod" ||
+            runningMotion?.type == "Seated Mod" ||
+            runningMotion?.type == "Round Robin" ||
+            runningMotion?.type == "Consulation of the Whole") &&
+            _currentMode != "Speakers List"
+          , child: _buildModInfo()),
+          SizedBox(height: 8.0),
           Expanded(child: _buildSpeakersList()),
-          SizedBox(height: 16.0),
+          SizedBox(height: 8.0),
         ],
       );
     case 1:
-      return _buildMotionList();
+      return _buildVotingPage();
     case 2:
       return _buildSettingsPage();
     case 3:
@@ -210,7 +232,10 @@ Widget _buildBody() {
   }
 
   Widget _buildSecondaryBody() {
-  if (fullSpeakersList == false) {return Column(
+  
+    switch (_selectedIndex) {
+    case 0:
+      if (fullSpeakersList == false) {return Column(
       children: [
         SizedBox(height: 8.0),
         _buildMotionList(),
@@ -229,6 +254,7 @@ Widget _buildBody() {
     else{
       return Column(
       children: [
+        
         SizedBox(height: 8.0),
         _buildFullSpeakersList(),
         Row(
@@ -243,6 +269,27 @@ Widget _buildBody() {
       ],
     );
     }
+    case 1:
+      return Column(
+      children: [
+        SizedBox(height: 8.0),
+        if (_isRollCallVote) _buildVoteCountBar(),
+        Expanded(
+          child: _buildMotionList(),
+        ),
+        _buildAddMotion(),
+        
+      ],
+    );
+    case 2:
+      return Container();
+    case 3:
+      // Handle the "Back" button action
+    
+      return Container();
+    default:
+      return Container();
+  }
   }
 
   void _startTimer() {
@@ -283,8 +330,7 @@ Widget _buildBody() {
   Widget _buildTimer() {
     String formattedTime = _formatTime(_remainingTime);
     String formattedTotalTime = _formatTime(_speakerTime);
-    String formattedCaucusTime = _formatTime(_remainingCaucusTime);
-    String formattedTotalCaucusTime = _formatTime(_caucusTime);
+    
       Speaker? timerSpeaker;
     if(_currentMode == "Speakers List"){timerSpeaker = currentSpeaker;}
     else{timerSpeaker = currentModSpeaker;}
@@ -308,6 +354,7 @@ Widget _buildBody() {
                         ),
                         SizedBox(width: 16,),
           Text(timerSpeaker?.country.code ?? "No Speaker Selected", textScaler: TextScaler.linear(2),),
+          
             ],
           ),
           SizedBox(height: 16.0),
@@ -489,6 +536,39 @@ Widget _buildBody() {
         ),
       ],
     );
+  }
+
+  Widget _buildModInfo(){
+    String formattedCaucusTime = _formatTime(_remainingCaucusTime);
+    String formattedTotalCaucusTime = _formatTime(_caucusTime);
+
+      return Container(
+        decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primaryContainer,
+        borderRadius: BorderRadius.all(Radius.circular(15))
+        
+      ),
+      padding: EdgeInsets.all(16.0),
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Visibility(
+            visible: runningMotion?.description != null,
+          child:
+            Text(
+              "Topic: " + (runningMotion?.description ?? 'None'),
+              style: TextStyle(fontSize: 20.0),
+          ),),
+          Expanded(child: SizedBox(),),
+            Text(
+              'Total Time: $formattedCaucusTime / $formattedTotalCaucusTime',
+              style: TextStyle(fontSize: 20.0),
+          ),
+          
+        
+        ],
+            ),
+      );
   }
 
   void _showAddSpeakerDialog() async{
@@ -1051,7 +1131,7 @@ Widget _buildBody() {
       ),
     );
     }
-    else if( _currentMod.length > 12 && _currentMode == 'Speakers List'){
+    else if( _currentMod.length > 12 && _currentMode == 'Moderated Caucus'){
       List<Speaker> _expandedSpeakersList = _currentMod.sublist(12);
     return Expanded(
       child: Container(
@@ -1066,6 +1146,7 @@ Widget _buildBody() {
       itemCount: _expandedSpeakersList.length,
       itemBuilder: (context, index) {
         return ListTile(
+         
           leading: CountryFlag.fromCountryCode(
                           _expandedSpeakersList[index].country.name,
                           height: 24,
@@ -1344,10 +1425,198 @@ void _showSpeakerOrderDialog(Motion motion) {
 
 void _setCaucusTime(int seconds) {
   setState(() {
-    _caucusTime = seconds;
-    _remainingCaucusTime = seconds;
+    _caucusTime = seconds * 60;
+    _remainingCaucusTime = seconds * 60;
   });
 }
+
+Widget _buildVotingPage() {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _isRollCallVote = true;
+                      });
+                    },
+                    child: Text('Roll Call Vote'),
+                  ),
+                  SizedBox(width: 8.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _isRollCallVote = false;
+                      });
+                    },
+                    child: Text('Vote by Acclimation'),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16.0),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Resolution Name',
+                  border: InputBorder.none,
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _resolutionName = value;
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: _isRollCallVote ? _buildRollCallVoteList() : Container(),
+        ),
+      ],
+    );
+  }
+
+Widget _buildVoteCountBar() {
+    int yesCount = _votes.values.where((vote) => vote == 'Yes').length;
+    int noCount = _votes.values.where((vote) => vote == 'No').length;
+    int abstainCount = _votes.values.where((vote) => vote == 'Abstain').length;
+    int totalCount = selectedCountries.length;
+
+    return Container(
+      height: 40.0,
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primaryContainer,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: yesCount,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.horizontal(
+                  left: Radius.circular(20.0),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: noCount,
+            child: Container(
+              color: Colors.red,
+            ),
+          ),
+          Expanded(
+            flex: abstainCount,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.horizontal(
+                  right: Radius.circular(20.0),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRollCallVoteList() {
+  return Container(
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(15))
+      ),
+      padding: EdgeInsets.all(8.0),
+    child: ListView.builder(
+      itemCount: selectedCountries.length,
+      itemBuilder: (context, index) {
+        Country country = selectedCountries[index];
+        String vote = _votes[country.code] ?? '';
+        Color tintColor = _getTintColor(vote);
+    
+        bool isFirstItem = index == 0;
+        bool isLastItem = index == selectedCountries.length - 1;
+        String prevVote = isFirstItem ? '' : _votes[selectedCountries[index - 1].code] ?? '';
+        String nextVote = isLastItem ? '' : _votes[selectedCountries[index + 1].code] ?? '';
+    
+        BorderRadius borderRadius = BorderRadius.zero;
+        if (vote.isEmpty) {
+        } 
+        else if (vote.isNotEmpty && nextVote.isNotEmpty){
+          if (prevVote.isNotEmpty) {
+            borderRadius = BorderRadius.all(Radius.circular(6));
+          }
+          else {
+            borderRadius = BorderRadius.vertical(top: Radius.circular(15.0), bottom: Radius.circular(6.0));
+          }
+        }
+        else if (vote.isNotEmpty && prevVote.isNotEmpty) {
+            borderRadius = BorderRadius.vertical(bottom: Radius.circular(15.0), top: Radius.circular(6));
+        }
+        else{
+          borderRadius = BorderRadius.all(Radius.circular(15));
+        }
+    
+        return Column(
+          children: [
+            Container(
+            
+              decoration: BoxDecoration(
+                color: _enableTinting ? tintColor : null,
+                borderRadius: borderRadius,
+              ),
+              child: ListTile(
+                leading: CountryFlag.fromCountryCode(
+                  country.name,
+                  height: 24.0,
+                  width: 32.0,
+                  borderRadius: 5.0,
+                ),
+                title: Text(country.code),
+                trailing: SegmentedButton<String>(
+                  segments: [
+                    ButtonSegment(value: 'Yes', label: Text('Yes')),
+                    ButtonSegment(value: 'No', label: Text('No')),
+                    ButtonSegment(value: 'Abstain', label: Text('Abstain')),
+                  ],
+                  selected: {vote},
+                  onSelectionChanged: (selection) {
+                    setState(() {
+                      _votes[country.code] = selection.isEmpty ? '' : selection.first;
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 2.0), 
+          ],
+        );
+      },
+    ),
+  );
+}
+  
+  Color _getTintColor(String vote) {
+    switch (vote) {
+      case 'Yes':
+        return Colors.green.withOpacity(0.2);
+      case 'No':
+        return Colors.red.withOpacity(0.2);
+      case 'Abstain':
+        return Color.fromARGB(255, 202, 182, 4).withOpacity(0.2);
+      default:
+        return Colors.transparent;
+    }
+  }
+
 }
 
 
