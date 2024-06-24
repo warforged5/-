@@ -1587,6 +1587,7 @@ Widget _buildVoteCountBar() {
                     ButtonSegment(value: 'No', label: Text('No')),
                     ButtonSegment(value: 'Abstain', label: Text('Abstain')),
                   ],
+                  selectedIcon: SizedBox(),
                   selected: {vote},
                   onSelectionChanged: (selection) {
                     setState(() {
