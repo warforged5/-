@@ -183,4 +183,71 @@ class Motion {
       'created_by': author.toJson()
     };
   }
+
+}
+
+class Resolution {
+  final String title;
+  final List<Country> signatories;
+
+  Resolution({
+    required this.title,
+    required this.signatories,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'signatories': signatories.map((country) => country.toJson()).toList(),
+    };
+  }
+
+  factory Resolution.fromJson(Map<String, dynamic> json) {
+    return Resolution(
+      title: json['title'],
+      signatories: (json['signatories'] as List<dynamic>)
+          .map((countryJson) => Country.fromJson(countryJson))
+          .toList(),
+    );
+  }
+}
+
+class VotingMotion {
+  final int id;
+  final int committeeId;
+  final Resolution resolution;
+  final String motionType;
+  final String? clause;
+  final DateTime createdAt;
+
+  VotingMotion({
+    required this.id,
+    required this.committeeId,
+    required this.resolution,
+    required this.motionType,
+    this.clause,
+    DateTime? createdAt,
+  }) : createdAt = createdAt ?? DateTime.now();
+
+  factory VotingMotion.fromMap(Map<String, dynamic> map) {
+    return VotingMotion(
+      id: map['id'],
+      committeeId: map['committee_id'],
+      resolution: Resolution.fromJson(map['resolution']),
+      motionType: map['motion_type'],
+      clause: map['clause'],
+      createdAt: DateTime.parse(map['created_at']),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'committee_id': committeeId,
+      'resolution': resolution.toJson(),
+      'motion_type': motionType,
+      'clause': clause,
+      'created_at': createdAt.toIso8601String(),
+    };
+  }
 }

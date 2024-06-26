@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 class RollCallPage extends StatefulWidget {
+  const RollCallPage({super.key});
+
   @override
   _RollCallPageState createState() => _RollCallPageState();
 }
 
 class _RollCallPageState extends State<RollCallPage> {
-  List<Country> _countries = [
+  final List<Country> _countries = [
     Country('Country 1', 'Present'),
     Country('Country 2', 'Present and Voting'),
     Country('Country 3', 'Absent'),
@@ -54,7 +56,7 @@ class _RollCallPageState extends State<RollCallPage> {
   Widget _buildSecondaryBody() {
     return Container(
       color: Colors.blue.shade100,
-      child: Center(
+      child: const Center(
         child: Text(
           'Secondary Body',
           style: TextStyle(fontSize: 24.0),
@@ -77,21 +79,21 @@ class _RollCallPageState extends State<RollCallPage> {
                 onPressed: () {
                   _updateAttendanceStatus(index, 'Present');
                 },
-                child: Text('Present'),
+                child: const Text('Present'),
               ),
-              SizedBox(width: 8.0),
+              const SizedBox(width: 8.0),
               ElevatedButton(
                 onPressed: () {
                   _updateAttendanceStatus(index, 'Present and Voting');
                 },
-                child: Text('Present and Voting'),
+                child: const Text('Present and Voting'),
               ),
-              SizedBox(width: 8.0),
+              const SizedBox(width: 8.0),
               ElevatedButton(
                 onPressed: () {
                   _updateAttendanceStatus(index, 'Absent');
                 },
-                child: Text('Absent'),
+                child: const Text('Absent'),
               ),
             ],
           ),
@@ -104,7 +106,7 @@ class _RollCallPageState extends State<RollCallPage> {
   String newCountry = '';
 
   return Container(
-    padding: EdgeInsets.all(16.0),
+    padding: const EdgeInsets.all(16.0),
     child: TextField(
       onChanged: (value) {
         newCountry = value;
@@ -112,7 +114,7 @@ class _RollCallPageState extends State<RollCallPage> {
       decoration: InputDecoration(
         labelText: 'Add Country',
         suffixIcon: IconButton(
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add),
           onPressed: () {
             if (newCountry.isNotEmpty) {
               setState(() {

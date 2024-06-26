@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:country_flags/country_flags.dart';
-import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/foundation.dart';
 import 'main_page.dart';
 import 'constant.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   Conference? _selectedConference;
   
   CountryList _selectedCountryList = CountryList(id: 1, name: "", userId: "", forAll: false);
-  List<Country> _selectedCountries = [];
+  final List<Country> _selectedCountries = [];
   String countrySearchQuery = '';
   
 
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildSettingsScreen() {
     return Container(
       color: Colors.blue.shade100,
-      child: Center(
+      child: const Center(
         child: Text(
           'Settings Screen',
           style: TextStyle(fontSize: 24.0),
@@ -134,8 +135,8 @@ class _HomePageState extends State<HomePage> {
   Widget _buildConferenceCard() {
     return Card(
       child: ListTile(
-        leading: Icon(Icons.event),
-        title: Text('Saved Conferences'),
+        leading: const Icon(Icons.event),
+        title: const Text('Saved Conferences'),
         onTap: () {
           setState(() {
             _selectedCard = 'conferences';
@@ -148,8 +149,8 @@ class _HomePageState extends State<HomePage> {
   Widget _buildAccountCard() {
     return Card(
       child: ListTile(
-        leading: Icon(Icons.account_circle),
-        title: Text('Manage Account'),
+        leading: const Icon(Icons.account_circle),
+        title: const Text('Manage Account'),
         onTap: () {
           setState(() {
             _selectedCard = 'account';
@@ -162,8 +163,8 @@ class _HomePageState extends State<HomePage> {
   Widget _buildCreateConferenceCard() {
     return Card(
       child: ListTile(
-        leading: Icon(Icons.add),
-        title: Text('Create Conference'),
+        leading: const Icon(Icons.add),
+        title: const Text('Create Conference'),
         onTap: () {
           setState(() {
             _selectedCard = 'create_conference';
@@ -176,8 +177,8 @@ class _HomePageState extends State<HomePage> {
   Widget _buildCreateCountryListCard() {
     return Card(
       child: ListTile(
-        leading: Icon(Icons.flag),
-        title: Text('Create Country List'),
+        leading: const Icon(Icons.flag),
+        title: const Text('Create Country List'),
         onTap: () {
           setState(() {
             _selectedCard = 'create_country_list';
@@ -213,7 +214,7 @@ class _HomePageState extends State<HomePage> {
       } else if (snapshot.hasError) {
         return Center(child: Text('Error: ${snapshot.error}'));
       } else {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       }
     },
   );
@@ -230,16 +231,16 @@ Widget _buildAccountContent() {
           'Account Information',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 16),
-        Text('Name: John Doe'),
-        Text('Email: john.doe@example.com'),
-        SizedBox(height: 24),
+        const SizedBox(height: 16),
+        const Text('Name: John Doe'),
+        const Text('Email: john.doe@example.com'),
+        const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
             // Handle edit account button tap
             print('Edit Account');
           },
-          child: Text('Edit Account'),
+          child: const Text('Edit Account'),
         ),
       ],
     ),
@@ -259,17 +260,17 @@ Widget _buildCreateConferenceContent(BuildContext context) {
           'Create Conference',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextField(
           controller: nameController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Conference Name',
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextField(
           controller: dateController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Conference Date',
           ),
           onTap: () async {
@@ -285,7 +286,7 @@ Widget _buildCreateConferenceContent(BuildContext context) {
             }
           },
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () async {
             String name = nameController.text;
@@ -297,7 +298,7 @@ Widget _buildCreateConferenceContent(BuildContext context) {
 
             if (response != null) {
               // Handle error
-              print('Error creating conference: ${response}');
+              print('Error creating conference: $response');
             } else {
               // Conference created successfully
               print('Conference created successfully');
@@ -305,7 +306,7 @@ Widget _buildCreateConferenceContent(BuildContext context) {
               dateController.clear();
             }
           },
-          child: Text('Create'),
+          child: const Text('Create'),
         ),
       ],
     ),
@@ -322,14 +323,14 @@ Widget _buildCreateCountryListContent() {
         'Country Lists',
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: 16),
+      const SizedBox(height: 16),
       TextField(
         controller: countryListNameController,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Country List Name',
         ),
       ),
-      SizedBox(height: 16),
+      const SizedBox(height: 16),
       ElevatedButton(
         onPressed: () async {
           String countryListName = countryListNameController.text;
@@ -344,9 +345,9 @@ Widget _buildCreateCountryListContent() {
             });
           }
         },
-        child: Text('Create Country List'),
+        child: const Text('Create Country List'),
       ),
-      SizedBox(height: 16),
+      const SizedBox(height: 16),
       Expanded(
         child: FutureBuilder<List<CountryList>>(
           future: fetchCountryLists(),
@@ -359,7 +360,7 @@ Widget _buildCreateCountryListContent() {
                   CountryList countryList = countryLists[index];
                   return ListTile(
                     title: Text(countryList.name),
-                    trailing: countryList.forAll ? Text('For All') : null,
+                    trailing: countryList.forAll ? const Text('For All') : null,
                     onTap: () {
                       setState(() {
                         _selectedCard = 'country_list_details';
@@ -373,7 +374,7 @@ Widget _buildCreateCountryListContent() {
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),
@@ -383,7 +384,7 @@ Widget _buildCreateCountryListContent() {
 }
 
 Widget _buildCommitteesListContent() {
-  TextEditingController _newCommitteeController = TextEditingController();
+  TextEditingController newCommitteeController = TextEditingController();
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -391,7 +392,7 @@ Widget _buildCommitteesListContent() {
       Row(
         children: [
           IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               setState(() {
                 _selectedCard = 'conferences';
@@ -400,8 +401,8 @@ Widget _buildCommitteesListContent() {
           ),
           Expanded(
             child: TextField(
-              controller: _newCommitteeController,
-              decoration: InputDecoration(
+              controller: newCommitteeController,
+              decoration: const InputDecoration(
                 labelText: 'Create New Committee',
               ),
               onSubmitted: (value) async {
@@ -416,7 +417,7 @@ Widget _buildCommitteesListContent() {
                   });
                   if (response != null) {
                     // Committee created successfully
-                    _newCommitteeController.clear();
+                    newCommitteeController.clear();
                     setState(() {});
                   } else {
                     // Handle error
@@ -458,7 +459,7 @@ Widget _buildCommitteesListContent() {
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),
@@ -493,17 +494,17 @@ Widget _buildCountryListDetailsContent() {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        _selectedCountryList!.name,
+        _selectedCountryList.name,
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
-      SizedBox(height: 16),
+      const SizedBox(height: 16),
       Row(
         children: [
           Expanded(
             child: TextField(
               decoration: InputDecoration(
                 labelText: 'Search Countries',
-                suffixIcon: Icon(Icons.search),
+                suffixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(33.0),
               ),
@@ -515,9 +516,9 @@ Widget _buildCountryListDetailsContent() {
               },
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(33),
             ),
@@ -528,21 +529,21 @@ Widget _buildCountryListDetailsContent() {
               ),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
         ],
       ),
-      SizedBox(height: 16),
+      const SizedBox(height: 16),
       Row(
         children: [
           Expanded(
             child: TextField(
               controller: newCountryController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Add Country',
               ),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           ElevatedButton(
             onPressed: () async {
               String newCountry = newCountryController.text;
@@ -556,21 +557,21 @@ Widget _buildCountryListDetailsContent() {
                 setState(() {});
               }
             },
-            child:Icon(
+            child:const Icon(
               Icons.add,
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
         ],
       ),
-      SizedBox(height: 16),
+      const SizedBox(height: 16),
     
        Expanded(
         child: FutureBuilder<List<Country>>(
           future: fetchCountries(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
@@ -592,7 +593,7 @@ Widget _buildCountryListDetailsContent() {
                           width: 32,
                           borderRadius: 4,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(country.code),
                       ],
                     ),
@@ -614,13 +615,13 @@ Widget _buildCountryListDetailsContent() {
           },
         ),
       ),
-      SizedBox(height: 16),
+      const SizedBox(height: 16),
     ],
   );
 }
 
 Future<void> saveCountryList() async {
-  final countryListId = _selectedCountryList!.id;
+  final countryListId = _selectedCountryList.id;
   
   final selectedCountries = _selectedCountries.map((country) => {
     'countrylist_id': countryListId,

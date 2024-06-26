@@ -10,6 +10,8 @@ import 'voting_page.dart';
 import 'settings_page.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -33,21 +35,21 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.blue,
                 ),
               ),
-              SizedBox(height: 32.0),
+              const SizedBox(height: 32.0),
               SupaEmailAuth(
                 redirectTo: kIsWeb ? null : 'com.wheelermun.modelunwebcontrol://callback',
                 onSignInComplete: (response) {
                   // Navigate to the home page on successful sign-in
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => const HomePage()),
                   );
                 },
                 onSignUpComplete: (response) {
                   // Navigate to a waiting page after sign-up
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => WaitingPage()),
+                    MaterialPageRoute(builder: (context) => const WaitingPage()),
                   );
                 },
                 metadataFields: [
@@ -64,14 +66,14 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 24.0),
-              Text(
+              const SizedBox(height: 24.0),
+              const Text(
                 'Or sign in with',
                 style: TextStyle(fontSize: 16.0),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               SupaSocialsAuth(
-                socialProviders: [
+                socialProviders: const [
                   OAuthProvider.apple,
                   OAuthProvider.google,
                 ],
@@ -85,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                   // Navigate to the home page on successful social sign-in
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => const HomePage()),
                   );
                 },
                 onError: (error) {
@@ -102,6 +104,8 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class WaitingPage extends StatelessWidget {
+  const WaitingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,12 +114,12 @@ class WaitingPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.email,
               size: 80.0,
               color: Colors.blue,
             ),
-            SizedBox(height: 24.0),
+            const SizedBox(height: 24.0),
             Text(
               'Thank you for signing up!',
               style: TextStyle(
@@ -124,19 +128,19 @@ class WaitingPage extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               'Please check your email to verify your account.',
-              style: TextStyle(fontSize: 18.0),
+              style: const TextStyle(fontSize: 18.0),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 32.0),
+            const SizedBox(height: 32.0),
             ElevatedButton(
               onPressed: () {
                 // Navigate back to the login page
                 Navigator.pushReplacementNamed(context, '/');
               },
-              child: Text('Back to Login'),
+              child: const Text('Back to Login'),
             ),
           ],
         ),
