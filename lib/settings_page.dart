@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -31,16 +33,16 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _buildBody() {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildDarkModeToggle(),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           _buildLanguageDropdown(),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           _buildNotificationSettings(),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           _buildAboutSection(),
         ],
       ),
@@ -54,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildSecondaryBody() {
     return Container(
       color: Colors.blue.shade100,
-      child: Center(
+      child: const Center(
         child: Text(
           'Secondary Body',
           style: TextStyle(fontSize: 24.0),
@@ -65,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _buildDarkModeToggle() {
     return SwitchListTile(
-      title: Text('Dark Mode'),
+      title: const Text('Dark Mode'),
       value: _darkModeEnabled,
       onChanged: (value) {
         setState(() {
@@ -89,7 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Text(language),
               ))
           .toList(),
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelText: 'Language',
       ),
     );
@@ -97,24 +99,24 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _buildNotificationSettings() {
     return ExpansionTile(
-      title: Text('Notification Settings'),
+      title: const Text('Notification Settings'),
       children: [
         CheckboxListTile(
-          title: Text('Enable Notifications'),
+          title: const Text('Enable Notifications'),
           value: true,
           onChanged: (value) {
             // Update notification settings
           },
         ),
         CheckboxListTile(
-          title: Text('Sound'),
+          title: const Text('Sound'),
           value: true,
           onChanged: (value) {
             // Update sound settings
           },
         ),
         CheckboxListTile(
-          title: Text('Vibrate'),
+          title: const Text('Vibrate'),
           value: false,
           onChanged: (value) {
             // Update vibration settings
@@ -135,10 +137,10 @@ class _SettingsPageState extends State<SettingsPage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8.0),
-        Text('Version 1.0.0'),
-        SizedBox(height: 8.0),
-        Text('Developed by Your Company'),
+        const SizedBox(height: 8.0),
+        const Text('Version 1.0.0'),
+        const SizedBox(height: 8.0),
+        const Text('Developed by Your Company'),
       ],
     );
   }

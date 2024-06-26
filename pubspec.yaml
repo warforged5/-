@@ -48,6 +48,7 @@ dependencies:
   getwidget: ^4.0.0
   dropdown_button2: ^2.3.9
   toastification: ^2.0.0
+  multi_select_flutter: ^4.1.3
 
 
 

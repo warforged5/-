@@ -15,10 +15,12 @@ void main() async {
     url: 'https://cmcfmxqhelagntojgbvj.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtY2ZteHFoZWxhZ250b2pnYnZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTY5MzkwNDksImV4cCI6MjAzMjUxNTA0OX0.hKVU9b0FiRaxULBDmMA2QRODWRhEy1BigpG0MGdrSM8',
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,12 +31,12 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginPage(),
-        '/home': (context) => HomePage(),
-        '/roll-call': (context) => RollCallPage(),
-        '/voting': (context) => VotingPage(),
-        '/settings': (context) => SettingsPage(),
-        '/waiting': (context) => WaitingPage(),
+        '/': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
+        '/roll-call': (context) => const RollCallPage(),
+        '/voting': (context) => const VotingPage(),
+        '/settings': (context) => const SettingsPage(),
+        '/waiting': (context) => const WaitingPage(),
       },
     );
   }

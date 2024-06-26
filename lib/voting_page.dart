@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 class VotingPage extends StatefulWidget {
+  const VotingPage({super.key});
+
   @override
   _VotingPageState createState() => _VotingPageState();
 }
@@ -54,7 +56,7 @@ class _VotingPageState extends State<VotingPage> {
   Widget _buildSecondaryBody() {
     return Container(
       color: Colors.blue.shade100,
-      child: Center(
+      child: const Center(
         child: Text(
           'Secondary Body',
           style: TextStyle(fontSize: 24.0),
@@ -79,11 +81,11 @@ class _VotingPageState extends State<VotingPage> {
   Widget _buildVotingStatusIcon(VotingStatus status) {
     switch (status) {
       case VotingStatus.pending:
-        return Icon(Icons.hourglass_empty);
+        return const Icon(Icons.hourglass_empty);
       case VotingStatus.passed:
-        return Icon(Icons.check, color: Colors.green);
+        return const Icon(Icons.check, color: Colors.green);
       case VotingStatus.failed:
-        return Icon(Icons.close, color: Colors.red);
+        return const Icon(Icons.close, color: Colors.red);
     }
   }
 
@@ -95,13 +97,13 @@ class _VotingPageState extends State<VotingPage> {
           onPressed: () {
             _showVotingDialog(VotingStatus.passed);
           },
-          child: Text('Pass'),
+          child: const Text('Pass'),
         ),
         ElevatedButton(
           onPressed: () {
             _showVotingDialog(VotingStatus.failed);
           },
-          child: Text('Fail'),
+          child: const Text('Fail'),
         ),
       ],
     );
@@ -112,21 +114,21 @@ class _VotingPageState extends State<VotingPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Confirm Voting'),
+          title: const Text('Confirm Voting'),
           content: Text('Are you sure you want to vote ${status.toString().split('.').last}?'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
                 _updateVotingStatus(status);
                 Navigator.pop(context);
               },
-              child: Text('Confirm'),
+              child: const Text('Confirm'),
             ),
           ],
         );
