@@ -1,0 +1,18 @@
+{
+  "" : {
+    "diagnostics" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/app_links-master.dia",
+    "emit-module-dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/app_links-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/app_links-master-emit-module.dia",
+    "swift-dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/app_links-master.swiftdeps"
+  },
+  "/Users/kirstenfournier_1/.pub-cache/hosted/pub.dev/app_links-5.0.0/macos/Classes/AppLinksMacosPlugin.swift" : {
+    "const-values" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/AppLinksMacosPlugin.swiftconstvalues",
+    "dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/AppLinksMacosPlugin.d",
+    "diagnostics" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/AppLinksMacosPlugin.dia",
+    "index-unit-output-path" : "/Pods.build/Debug/app_links.build/Objects-normal/arm64/AppLinksMacosPlugin.o",
+    "llvm-bc" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/AppLinksMacosPlugin.bc",
+    "object" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/AppLinksMacosPlugin.o",
+    "swift-dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/AppLinksMacosPlugin.swiftdeps",
+    "swiftmodule" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Pods.build/Debug/app_links.build/Objects-normal/arm64/AppLinksMacosPlugin~partial.swiftmodule"
+  }
+}

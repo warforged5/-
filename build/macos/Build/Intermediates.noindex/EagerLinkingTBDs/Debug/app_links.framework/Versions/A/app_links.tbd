@@ -1,0 +1,71 @@
+{
+  "main_library": {
+    "exported_symbols": [
+      {
+        "data": {
+          "global": [
+            "_$s9app_links19AppLinksMacosPluginC11handleEvent33_2F6A495CB7B3DC128F1BE26EA969E861LL_4withySo07NSAppleH10DescriptorC_AHtF",
+            "_$s9app_links19AppLinksMacosPluginC8onCancel13withArgumentsSo12FlutterErrorCSgypSg_tF",
+            "_$s9app_links19AppLinksMacosPluginCN",
+            "_$s9app_links19AppLinksMacosPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctF",
+            "_$s9app_links19AppLinksMacosPluginC11initialLink33_2F6A495CB7B3DC128F1BE26EA969E861LLSSSgvs",
+            "_$s9app_links19AppLinksMacosPluginCMa",
+            "_$s9app_links19AppLinksMacosPluginC8onListen13withArguments9eventSinkSo12FlutterErrorCSgypSg_yAJctF",
+            "_$s9app_links19AppLinksMacosPluginC11initialLink33_2F6A495CB7B3DC128F1BE26EA969E861LLSSSgvg",
+            "_$s9app_links19AppLinksMacosPluginC10latestLink33_2F6A495CB7B3DC128F1BE26EA969E861LLSSSgvs",
+            "_$s9app_links19AppLinksMacosPluginC10latestLink33_2F6A495CB7B3DC128F1BE26EA969E861LLSSSgvpfi",
+            "_$s9app_links19AppLinksMacosPluginC8register4withySo07FlutterF9Registrar_p_tFZ",
+            "_$s9app_links19AppLinksMacosPluginCMn",
+            "_$s9app_links19AppLinksMacosPluginC9eventSink33_2F6A495CB7B3DC128F1BE26EA969E861LLyypSgcSgvM",
+            "_$s9app_links19AppLinksMacosPluginCfD",
+            "_$s9app_links19AppLinksMacosPluginC8onCancel13withArgumentsSo12FlutterErrorCSgypSg_tFTq",
+            "_$s9app_links19AppLinksMacosPluginCACycfc",
+            "_app_linksVersionString",
+            "_$s9app_links19AppLinksMacosPluginC8onListen13withArguments9eventSinkSo12FlutterErrorCSgypSg_yAJctFTq",
+            "_$s9app_links19AppLinksMacosPluginC9eventSink33_2F6A495CB7B3DC128F1BE26EA969E861LLyypSgcSgvpfi",
+            "_$s9app_links19AppLinksMacosPluginC25handleWillFinishLaunchingyy10Foundation12NotificationVF",
+            "_$s9app_links19AppLinksMacosPluginC10handleLink33_2F6A495CB7B3DC128F1BE26EA969E861LL4linkySS_tF",
+            "_$s9app_links19AppLinksMacosPluginCACycfC",
+            "_app_linksVersionNumber",
+            "_$s9app_links19AppLinksMacosPluginC25handleWillFinishLaunchingyy10Foundation12NotificationVFTq",
+            "_$s9app_links19AppLinksMacosPluginC9eventSink33_2F6A495CB7B3DC128F1BE26EA969E861LLyypSgcSgvs",
+            "_$s9app_links19AppLinksMacosPluginC10latestLink33_2F6A495CB7B3DC128F1BE26EA969E861LLSSSgvM",
+            "_$s9app_links19AppLinksMacosPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctFTq",
+            "_$s9app_links19AppLinksMacosPluginC9eventSink33_2F6A495CB7B3DC128F1BE26EA969E861LLyypSgcSgvg",
+            "_$s9app_links19AppLinksMacosPluginC10latestLink33_2F6A495CB7B3DC128F1BE26EA969E861LLSSSgvg",
+            "_$s9app_links19AppLinksMacosPluginC11initialLink33_2F6A495CB7B3DC128F1BE26EA969E861LLSSSgvM",
+            "_$s9app_links19AppLinksMacosPluginC11initialLink33_2F6A495CB7B3DC128F1BE26EA969E861LLSSSgvpfi"
+          ],
+          "objc_class": [
+            "_TtC9app_links19AppLinksMacosPlugin",
+            "PodsDummy_app_links"
+          ]
+        }
+      }
+    ],
+    "flags": [
+      {
+        "attributes": [
+          "not_app_extension_safe"
+        ]
+      }
+    ],
+    "install_names": [
+      {
+        "name": "@rpath/app_links.framework/Versions/A/app_links"
+      }
+    ],
+    "swift_abi": [
+      {
+        "abi": 7
+      }
+    ],
+    "target_info": [
+      {
+        "min_deployment": "11",
+        "target": "arm64-macos"
+      }
+    ]
+  },
+  "tapi_tbd_version": 5
+}

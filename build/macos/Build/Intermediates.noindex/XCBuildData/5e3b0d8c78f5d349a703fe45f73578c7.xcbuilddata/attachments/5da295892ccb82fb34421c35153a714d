@@ -1,0 +1,48 @@
+{
+  "" : {
+    "diagnostics" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/Runner-master.dia",
+    "emit-module-dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/Runner-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/Runner-master-emit-module.dia",
+    "swift-dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/Runner-master.swiftdeps"
+  },
+  "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  },
+  "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/macos/Flutter/GeneratedPluginRegistrant.swift" : {
+    "const-values" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedPluginRegistrant.swiftconstvalues",
+    "dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedPluginRegistrant.d",
+    "diagnostics" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedPluginRegistrant.dia",
+    "index-unit-output-path" : "/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedPluginRegistrant.o",
+    "llvm-bc" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedPluginRegistrant.bc",
+    "object" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedPluginRegistrant.o",
+    "swift-dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedPluginRegistrant.swiftdeps",
+    "swiftmodule" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/GeneratedPluginRegistrant~partial.swiftmodule"
+  },
+  "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/macos/Runner/AppDelegate.swift" : {
+    "const-values" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/AppDelegate.swiftconstvalues",
+    "dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/AppDelegate.d",
+    "diagnostics" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/AppDelegate.dia",
+    "index-unit-output-path" : "/Runner.build/Debug/Runner.build/Objects-normal/arm64/AppDelegate.o",
+    "llvm-bc" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/AppDelegate.bc",
+    "object" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/AppDelegate.o",
+    "swift-dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/AppDelegate.swiftdeps",
+    "swiftmodule" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/AppDelegate~partial.swiftmodule"
+  },
+  "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/macos/Runner/MainFlutterWindow.swift" : {
+    "const-values" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/MainFlutterWindow.swiftconstvalues",
+    "dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/MainFlutterWindow.d",
+    "diagnostics" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/MainFlutterWindow.dia",
+    "index-unit-output-path" : "/Runner.build/Debug/Runner.build/Objects-normal/arm64/MainFlutterWindow.o",
+    "llvm-bc" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/MainFlutterWindow.bc",
+    "object" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/MainFlutterWindow.o",
+    "swift-dependencies" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/MainFlutterWindow.swiftdeps",
+    "swiftmodule" : "/Users/kirstenfournier_1/Documents/wheeler_nhs/wheeler_nhs/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/MainFlutterWindow~partial.swiftmodule"
+  }
+}
