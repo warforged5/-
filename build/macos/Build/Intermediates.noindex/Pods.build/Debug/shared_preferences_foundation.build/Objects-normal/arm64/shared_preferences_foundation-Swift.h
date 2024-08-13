@@ -303,6 +303,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if defined(__OBJC__)
 @protocol FlutterPluginRegistrar;
 
+SWIFT_CLASS("_TtC29shared_preferences_foundation29LegacySharedPreferencesPlugin")
+@interface LegacySharedPreferencesPlugin : NSObject <FlutterPlugin>
++ (void)registerWithRegistrar:(id <FlutterPluginRegistrar> _Nonnull)registrar;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC29shared_preferences_foundation23SharedPreferencesPlugin")
 @interface SharedPreferencesPlugin : NSObject <FlutterPlugin>
 + (void)registerWithRegistrar:(id <FlutterPluginRegistrar> _Nonnull)registrar;
