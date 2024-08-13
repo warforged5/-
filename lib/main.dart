@@ -1679,9 +1679,11 @@ class _AdminEventsPageState extends State<AdminEventsPage> {
         .order('date');
 
     final List<dynamic> data = response;
+    if (this.mounted){
     setState(() {
       _events = data.map((json) => Event.fromJson(json)).toList();
     });
+    }
   }
 
   @override
